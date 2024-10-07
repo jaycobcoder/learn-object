@@ -102,12 +102,18 @@ class ReservationServiceTest {
 
         Mockito.when(discountConditionDAO.selectDiscountConditions(policyId))
                 .thenReturn(List.of(
-                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null,1),
-                        new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null, 10),
-                        new DiscountCondition(3L, policyId, PERIOD_CONDITION, MONDAY,
-                                new TimeInterval(LocalTime.of(10, 12), LocalTime.of(12, 0)), null),
-                        new DiscountCondition(4L, policyId, PERIOD_CONDITION, WEDNESDAY,
-                                new TimeInterval(LocalTime.of(18, 0), LocalTime.of(21, 0)), null)));
+                                new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null,
+                                        1),
+                                new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null,
+                                        10),
+                                new DiscountCondition(3L, policyId, PERIOD_CONDITION, MONDAY,
+                                        new TimeInterval(LocalTime.of(10, 12), LocalTime.of(12, 0)),
+                                        null),
+                                new DiscountCondition(4L, policyId, PERIOD_CONDITION, WEDNESDAY,
+                                        new TimeInterval(LocalTime.of(18, 0), LocalTime.of(21, 0)),
+                                        null)
+                        )
+                );
 
         // when
         Reservation reservation = reservationService.reserveScreening(customerId, screeningId, 2);
