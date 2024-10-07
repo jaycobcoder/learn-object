@@ -12,6 +12,7 @@ import com.example.object_procedure.domain.DiscountPolicy;
 import com.example.object_procedure.domain.Movie;
 import com.example.object_procedure.domain.Reservation;
 import com.example.object_procedure.domain.Screening;
+import com.example.object_procedure.domain.TimeInterval;
 import com.example.object_procedure.generic.Money;
 import com.example.object_procedure.persistence.DiscountConditionDAO;
 import com.example.object_procedure.persistence.DiscountPolicyDAO;
@@ -67,14 +68,12 @@ class ReservationServiceTest {
 
         Mockito.when(discountConditionDAO.selectDiscountConditions(policyId))
                 .thenReturn(List.of(
-                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null, null,
-                                1),
-                        new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null, null,
-                                10),
+                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null, 1),
+                        new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null, 10),
                         new DiscountCondition(3L, policyId, PERIOD_CONDITION, MONDAY,
-                                LocalTime.of(10, 12), LocalTime.of(12, 0), null),
+                                new TimeInterval(LocalTime.of(10, 12), LocalTime.of(12, 0)), null),
                         new DiscountCondition(4L, policyId, PERIOD_CONDITION, WEDNESDAY,
-                                LocalTime.of(18, 0), LocalTime.of(21, 0), null)));
+                                new TimeInterval(LocalTime.of(18, 0), LocalTime.of(21, 0)), null)));
 
         // when
         Reservation reservation = reservationService.reserveScreening(customerId, screeningId, 2);
@@ -103,14 +102,12 @@ class ReservationServiceTest {
 
         Mockito.when(discountConditionDAO.selectDiscountConditions(policyId))
                 .thenReturn(List.of(
-                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null, null,
-                                1),
-                        new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null, null,
-                                10),
+                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null,1),
+                        new DiscountCondition(2L, policyId, SEQUENCE_CONDITION, null, null, 10),
                         new DiscountCondition(3L, policyId, PERIOD_CONDITION, MONDAY,
-                                LocalTime.of(10, 12), LocalTime.of(12, 0), null),
+                                new TimeInterval(LocalTime.of(10, 12), LocalTime.of(12, 0)), null),
                         new DiscountCondition(4L, policyId, PERIOD_CONDITION, WEDNESDAY,
-                                LocalTime.of(18, 0), LocalTime.of(21, 0), null)));
+                                new TimeInterval(LocalTime.of(18, 0), LocalTime.of(21, 0)), null)));
 
         // when
         Reservation reservation = reservationService.reserveScreening(customerId, screeningId, 2);

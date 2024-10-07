@@ -5,32 +5,32 @@ import java.time.LocalTime;
 
 public class DiscountCondition {
 
-    public enum ConditionType {PERIOD_CONDITION, SEQUENCE_CONDITION}
+    public enum ConditionType {
+        PERIOD_CONDITION, SEQUENCE_CONDITION, COMBINED_CONDITION
+    }
 
     private Long id;
     private Long policyId;
     private ConditionType conditionType;
     private DayOfWeek dayOfWeek;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private TimeInterval interval;
     private Integer sequence;
 
     public DiscountCondition() {
     }
 
     public DiscountCondition(Long policyId, ConditionType conditionType, DayOfWeek dayOfWeek,
-            LocalTime startTime, LocalTime endTime, Integer sequence) {
-        this(null, policyId, conditionType, dayOfWeek, startTime, endTime, sequence);
+            TimeInterval interval, Integer sequence) {
+        this(null, policyId, conditionType, dayOfWeek, interval, sequence);
     }
 
     public DiscountCondition(Long id, Long policyId, ConditionType conditionType,
-            DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, Integer sequence) {
+            DayOfWeek dayOfWeek, TimeInterval interval, Integer sequence) {
         this.id = id;
         this.policyId = policyId;
         this.conditionType = conditionType;
         this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.interval = interval;
         this.sequence = sequence;
     }
 
@@ -58,6 +58,10 @@ public class DiscountCondition {
         return ConditionType.SEQUENCE_CONDITION.equals(conditionType);
     }
 
+    public boolean isCombinedCondition() {
+        return ConditionType.COMBINED_CONDITION.equals(conditionType);
+    }
+
     public ConditionType getConditionType() {
         return conditionType;
     }
@@ -74,27 +78,19 @@ public class DiscountCondition {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
     public Integer getSequence() {
         return sequence;
     }
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    public TimeInterval getInterval() {
+        return interval;
+    }
+
+    public void setInterval(TimeInterval interval) {
+        this.interval = interval;
     }
 }
